@@ -1,5 +1,5 @@
 {
-  "name": "Polls-API",
+  "name": "pools-api",
   "version": "1.0.0",
   "main": "index.js",
   "author": "<viniciusbeloti7@gmail.com>",
@@ -23,6 +23,7 @@
     "typescript": "^4.0.2"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:staged": "jest"
   }
 }
