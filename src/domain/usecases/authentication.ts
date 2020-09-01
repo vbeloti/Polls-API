@@ -1,4 +1,9 @@
 
+export interface AuthenticationModel {
+  email: string;
+  password: string;
+}
+
 export interface Authentication {
-  async auth (email: string, password: string): Promise<string>;
+  auth (authentication: AuthenticationModel): Promise<string>;
 }
