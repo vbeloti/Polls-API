@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { SignUpController } from './signup';
+import { SignUpController } from './signup-controller';
 import { ServerError, MissingParamError } from '../../errors';
-import { AddAccount, AddAccountModel, AccountModel, HttpRequest, Validation } from './signup-protocols';
+import { AddAccount, AddAccountModel, AccountModel, HttpRequest, Validation } from './signup-protocols-controller';
 import { ok, serverError, badRequest } from '../../helpers/http/http-helper';
 
 const makeAddAcount = (): AddAccount => {
