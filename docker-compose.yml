@@ -10,10 +10,11 @@ services:
       - "27018:27017"
   api:
     container_name: api-container
-    build: .
+    image: node:14
+    working_dir: /usr/src/polls-api
     image: polls-api
     restart: always
-    command: npm run start
+    command: bash -c "npm install --only=prod && npm run start"
     volumes:
       - ./dist:/usr/src/polls-api/dist
       - ./package.json/usr/src/polls-api/package.json
