@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/vbeloti/surveys-api.svg?branch=master)](https://travis-ci.org/vbeloti/surveys-api)
-[![Coverage Status](https://coveralls.io/repos/github/vbeloti/Polls-API/badge.svg?branch=master)](https://coveralls.io/github/vbeloti/Polls-API?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/vbeloti/surveys-api/badge.svg?branch=master)](https://coveralls.io/github/vbeloti/surveys-api?branch=master)
 
 ## Surveys Api (Node.js && Typescript && Express.js && Postgres)
 
