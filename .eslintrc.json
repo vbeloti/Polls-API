@@ -20,6 +20,7 @@
         "camelcase": "off",
         "semi": [2, "always"],
         "no-unused-vars": "off",
+        "no-useless-constructor": "off",
         "@typescript-eslint/no-unused-vars": "warn"
     }
 }
