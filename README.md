@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/vbeloti/Polls-API.svg?branch=master)](https://travis-ci.org/vbeloti/Polls-API)
 [![Coverage Status](https://coveralls.io/repos/github/vbeloti/Polls-API/badge.svg?branch=master)](https://coveralls.io/github/vbeloti/Polls-API?branch=master)
 
-## Polls Api (Node.js && Typescript && Express.js && Postgres)
+## Surveys Api (Node.js && Typescript && Express.js && Postgres)
 
-# Polls Api
+# Surveys Api
 
 ## Open Endpoints
 
