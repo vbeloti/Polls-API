@@ -10,7 +10,7 @@ const makeFakeSurveys = (): SurveyModel[] => {
       image: 'any_image',
       answer: 'any_answer'
     }],
-    date: new Date()
+    date: new Date(2020, 6, 10, 11)
   }, {
     id: 'other_id',
     question: 'other_question',
@@ -18,7 +18,7 @@ const makeFakeSurveys = (): SurveyModel[] => {
       image: 'other_image',
       answer: 'other_answer'
     }],
-    date: new Date()
+    date: new Date(2020, 6, 10, 11)
   }];
 };
 
@@ -32,7 +32,7 @@ const makeLoadSurveysRepository = (): LoadSurveysRepository => {
   return new LoadSurveysRepositoryStub();
 };
 
-interface SutTypes {
+type SutTypes = {
   sut: DbLoadSurveys;
   loadSurveysRepositoryStub: LoadSurveysRepository
 }
