@@ -1,5 +1,5 @@
 import { AddAccountRepository } from '../../../../data/protocols/db/account/add-account-repository';
-import { AddAccountModel } from '../../../../domain/usecases/add-acount';
+import { AddAccountModel } from '../../../../domain/usecases/account/add-acount';
 import { AccountModel } from '../../../../domain/models/account';
 import { MongoHelper } from '../helpers/mongo-helper';
 import { LoadAccountByEmailRepository } from '../../../../data/protocols/db/account/load-account-by-email-repository';
