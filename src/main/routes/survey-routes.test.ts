@@ -1,36 +1,35 @@
-import request from 'supertest';
-import app from '../config/app';
-import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper';
-import env from '../config/env';
-import { Collection } from 'mongodb';
+import app from '@/main/config/app';
+import env from '@/main/config/env';
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper';
 import { sign } from 'jsonwebtoken';
+import { Collection } from 'mongodb';
+import request from 'supertest';
 
 let surveyCollection: Collection;
 let accountCollection: Collection;
 
-const makeAccessToken = async (): Promise<string> => {
+const mockAccessToken = async (): Promise<string> => {
   const res = await accountCollection.insertOne({
     name: 'Vinicius',
     email: 'vinicius.beloti@gmail.com',
     password: '123',
     role: 'admin'
   });
-
   const id = res.ops[0]._id;
   const accessToken = sign({ id }, env.jwtSecret);
-
-  await accountCollection.updateOne({ _id: id }, {
+  await accountCollection.updateOne({
+    _id: id
+  }, {
     $set: {
       accessToken
     }
   });
-
   return accessToken;
 };
 
 describe('Survey Routes', () => {
   beforeAll(async () => {
-    await MongoHelper.connect(env.mongoUrl);
+    await MongoHelper.connect(process.env.MONGO_URL);
   });
 
   afterAll(async () => {
@@ -49,7 +48,7 @@ describe('Survey Routes', () => {
       await request(app)
         .post('/api/surveys')
         .send({
-          question: 'any_question',
+          question: 'Question',
           answers: [{
             answer: 'Answer 1',
             image: 'http://image-name.com'
@@ -61,13 +60,12 @@ describe('Survey Routes', () => {
     });
 
     test('Should return 204 on add survey with valid accessToken', async () => {
-      const accessToken = await makeAccessToken();
-
+      const accessToken = await mockAccessToken();
       await request(app)
         .post('/api/surveys')
         .set('x-access-token', accessToken)
         .send({
-          question: 'any_question',
+          question: 'Question',
           answers: [{
             answer: 'Answer 1',
             image: 'http://image-name.com'
@@ -87,8 +85,7 @@ describe('Survey Routes', () => {
     });
 
     test('Should return 204 on load surveys with valid accessToken', async () => {
-      const accessToken = await makeAccessToken();
-
+      const accessToken = await mockAccessToken();
       await request(app)
         .get('/api/surveys')
         .set('x-access-token', accessToken)

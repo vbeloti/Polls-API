@@ -1,44 +1,47 @@
-import { Decrypter } from '../protocols/criptography/decrypter';
-import { Encrypter } from '../protocols/criptography/encrypter';
-import { HashCompare } from '../protocols/criptography/hash-compare';
-import { Hasher } from '../protocols/criptography/hasher';
+import { Hasher } from '@/data/protocols/criptography/hasher';
+import { HashComparer } from '@/data/protocols/criptography/hash-comparer';
+import { Encrypter } from '@/data/protocols/criptography/encrypter';
+import { Decrypter } from '@/data/protocols/criptography/decrypter';
+import faker from 'faker';
 
-export const mockHasher = (): Hasher => {
-  class HasherStub implements Hasher {
-    async hash (value: string): Promise<string> {
-      return Promise.resolve('any_password');
-    }
+export class HasherSpy implements Hasher {
+  digest = faker.random.uuid()
+  plaintext: string
+
+  async hash (plaintext: string): Promise<string> {
+    this.plaintext = plaintext;
+    return this.digest;
   }
+}
 
-  return new HasherStub();
-};
+export class HashComparerSpy implements HashComparer {
+  plaintext: string
+  digest: string
+  isValid = true
 
-export const mockDecrypter = (): Decrypter => {
-  class DecrypterStub implements Decrypter {
-    async decrypt (value: string): Promise<string> {
-      return Promise.resolve('any_value');
-    }
+  async compare (plaintext: string, digest: string): Promise<boolean> {
+    this.plaintext = plaintext;
+    this.digest = digest;
+    return this.isValid;
   }
+}
 
-  return new DecrypterStub();
-};
+export class EncrypterSpy implements Encrypter {
+  ciphertext = faker.random.uuid()
+  plaintext: string
 
-export const mockEncrypter = (): Encrypter => {
-  class EncrypterStub implements Encrypter {
-    async encrypt (id: string): Promise<string> {
-      return Promise.resolve('any_token');
-    }
+  async encrypt (plaintext: string): Promise<string> {
+    this.plaintext = plaintext;
+    return this.ciphertext;
   }
+}
 
-  return new EncrypterStub();
-};
+export class DecrypterSpy implements Decrypter {
+  plaintext = faker.internet.password()
+  ciphertext: string
 
-export const mockHashCompare = (): HashCompare => {
-  class HashCompareStub implements HashCompare {
-    async compare (value: string, hash: string): Promise<boolean> {
-      return Promise.resolve(true);
-    }
+  async decrypt (ciphertext: string): Promise<string> {
+    this.ciphertext = ciphertext;
+    return this.plaintext;
   }
-
-  return new HashCompareStub();
-};
+}

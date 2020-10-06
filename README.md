@@ -3,18 +3,11 @@
 
 ## Surveys Api (Node.js && Typescript && Express.js && Postgres)
 
-# Surveys API
+> ## Surveys API
 
-## Open Endpoints
-
-Open endpoints require no Authentication.
-
-* [Signup]: `POST /api/signup` -- Create Account
-
-## Closed Endpoints
-
-Closed endpoints required Authentication.
-
-* [Signin]: `POST /api/signin` -- Login Account
-* [Pools]: `POST /api/surveys` -- Create survey
-* [Pools]: `GET /api/surveys` -- List All surveys
+1. [Cadastro](./requirements/signup.md)
+2. [Login](./requirements/login.md)
+3. [Criar enquete](./requirements/add-survey.md)
+4. [Listar enquetes](./requirements/load-surveys.md)
+5. [Responder enquete](./requirements/save-survey-result.md)
+6. [Resultado da enquete](./requirements/load-survey-result.md)

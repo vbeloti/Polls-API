@@ -1,24 +1,23 @@
 import { DbAddSurvey } from './db-add-survey';
-import { AddSurveyRepository } from './db-add-survey-protocols';
+import { AddSurveyRepositorySpy } from '@/data/test';
+import { throwError, mockAddSurveyParams } from '@/domain/test';
 import MockDate from 'mockdate';
-import { mockAddSurveyParams, throwError } from '@/domain/test';
-import { mockAddSurveyRepository } from '@/data/test';
 
 type SutTypes = {
-  sut: DbAddSurvey;
-  addSurveyRepositoryStuby: AddSurveyRepository;
+  sut: DbAddSurvey
+  addSurveyRepositorySpy: AddSurveyRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
-  const addSurveyRepositoryStuby = mockAddSurveyRepository();
-  const sut = new DbAddSurvey(addSurveyRepositoryStuby);
+  const addSurveyRepositorySpy = new AddSurveyRepositorySpy();
+  const sut = new DbAddSurvey(addSurveyRepositorySpy);
   return {
     sut,
-    addSurveyRepositoryStuby
+    addSurveyRepositorySpy
   };
 };
 
-describe('DbAddSurvey UseCase', () => {
+describe('DbAddSurvey Usecase', () => {
   beforeAll(() => {
     MockDate.set(new Date());
   });
@@ -28,19 +27,16 @@ describe('DbAddSurvey UseCase', () => {
   });
 
   test('Should call AddSurveyRepository with correct values', async () => {
-    const { sut, addSurveyRepositoryStuby } = makeSut();
-    const addSpy = jest.spyOn(addSurveyRepositoryStuby, 'add');
+    const { sut, addSurveyRepositorySpy } = makeSut();
     const surveyData = mockAddSurveyParams();
     await sut.add(surveyData);
-    expect(addSpy).toHaveBeenCalledWith(surveyData);
+    expect(addSurveyRepositorySpy.addSurveyParams).toEqual(surveyData);
   });
 
   test('Should throw if AddSurveyRepository throws', async () => {
-    const { sut, addSurveyRepositoryStuby } = makeSut();
-
-    jest.spyOn(addSurveyRepositoryStuby, 'add').mockImplementationOnce(throwError);
-
+    const { sut, addSurveyRepositorySpy } = makeSut();
+    jest.spyOn(addSurveyRepositorySpy, 'add').mockImplementationOnce(throwError);
     const promise = sut.add(mockAddSurveyParams());
-    expect(promise).rejects.toThrow();
+    await expect(promise).rejects.toThrow();
   });
 });
