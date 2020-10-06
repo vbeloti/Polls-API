@@ -7,7 +7,7 @@ import { LoadSurveysRepository, SurveyModel } from '../usecases/survey/load-surv
 export const mockAddSurveyRepository = (): AddSurveyRepository => {
   class AddSurveyRepositoryStuby implements AddSurveyRepository {
     async add (surveyData: AddSurveyParams): Promise<void> {
-      return new Promise(resolve => resolve());
+      return Promise.resolve();
     }
   }
   return new AddSurveyRepositoryStuby();
@@ -16,7 +16,7 @@ export const mockAddSurveyRepository = (): AddSurveyRepository => {
 export const mockLoadSurveyByIdRepository = (): LoadSurveyByIdRepository => {
   class LoadSurveyByIdRepositoryStub implements LoadSurveyByIdRepository {
     async loadById (id: string): Promise<SurveyModel> {
-      return new Promise(resolve => resolve(mockFakeSurvey()));
+      return Promise.resolve(mockFakeSurvey());
     }
   }
 
@@ -26,7 +26,7 @@ export const mockLoadSurveyByIdRepository = (): LoadSurveyByIdRepository => {
 export const mockLoadSurveysRepository = (): LoadSurveysRepository => {
   class LoadSurveysRepositoryStub implements LoadSurveysRepository {
     async loadAll (): Promise<SurveyModel[]> {
-      return new Promise(resolve => resolve(mockSurveysModel()));
+      return Promise.resolve(mockSurveysModel());
     }
   }
 
